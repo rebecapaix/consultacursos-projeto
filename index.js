@@ -1,26 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container } from './styles';
+import {
+  Container,
+  Rate,
+  Separator,
+  UniversityName,
+  CourseName,
+  CourseKindAndShift,
+  CourseStartDate,
+  TitleMonthlyFee,
+  OldPrice,
+  Price,
+  Footer,
+  ButtonExclude,
+  ButtonShowOffer,
+  UnavailableText,
+} from './styles';
+import ScoreStars from '../ScoreStars';
 
-export default function RangeSlider({ range, action }) {
+export default function Scholarship({ data, exclude }) {
   return (
     <Container>
-      <span id="demo">{range}</span>
-      <input
-        type="range"
-        min="100"
-        max="10000"
-        defaultValue="10000"
-        className="slider"
-        id="myRange"
-        onChange={e => action(e)}
-      />
+      <img src={data.logo_url} alt={data.university_name} />
+      <UniversityName>{data.university_name}</UniversityName>
+      <CourseName>{data.course_name}</CourseName>
+      <Rate>
+        {data.university_score} <ScoreStars score={data.university_score} />
+      </Rate>
+      <Separator />
+      <CourseKindAndShift>
+        {data.course_kind} . {data.course_shift}
+      </CourseKindAndShift>
+      <CourseStartDate>As aulas começam em: {data.start_date}</CourseStartDate>
+      <Separator />
+      <TitleMonthlyFee>
+        {data.enabled ? 'Mensalidade com o Quero Bolsa:' : 'Bolsa indisponível'}
+      </TitleMonthlyFee>
+      {data.enabled ? (
+        <>
+          <OldPrice>{data.full_price_formatted}</OldPrice>
+          <Price>
+            {data.price_with_discount_formated}
+            <small>/mês</small>
+          </Price>
+        </>
+      ) : (
+        <UnavailableText>
+          Entre em contato conosco
+          <br /> para saber tudo sobre!
+        </UnavailableText>
+      )}
+
+      <Footer>
+        <ButtonExclude onClick={() => exclude(data.id)}>Excluir</ButtonExclude>
+        <ButtonShowOffer disabled={!data.enabled}>Checar oferta certeira</ButtonShowOffer>
+      </Footer>
     </Container>
   );
 }
 
-RangeSlider.propTypes = {
-  range: PropTypes.string.isRequired,
-  action: PropTypes.func.isRequired,
+Scholarship.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  exclude: PropTypes.func,
+};
+
+Scholarship.defaultProps = {
+  exclude: null,
 };
