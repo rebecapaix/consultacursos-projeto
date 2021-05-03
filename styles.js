@@ -1,112 +1,242 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
-
-export const RowContacts = styled.div`
-  background: #007a8d;
-  color: #ffff;
-  padding: 45px 0;
-  div {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  @media screen and (max-width: 996px) {
-    padding: 0;
-    > div {
-      max-width: 100%;
-    }
-  }
+export const Container = styled.header`
+  display: flex;
+  flex-direction: column;
 `;
 
-export const Col = styled.div`
-  flex: 1 1 auto;
-  max-width: 260px;
-  display: flex;
-  margin: 0 auto;
+export const Separator = styled.div`
+  width: 3px;
+  align-self: stretch;
+  background: #eeefef;
+`;
 
-  div {
+export const Head = styled.div`
+  height: 80px;
+  padding: 15px 0;
+  background: #fff;
+
+  > div {
+    justify-content: space-between;
     display: flex;
-    flex-direction: column;
-    margin-left: 15px;
-    align-items: start;
-    small,
-    b {
+    align-items: center;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: -25px;
+    display: flex;
+    width: 525px;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #007a8d;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        padding: 5px 25px;
+        small {
+          display: none;
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          font-weight: 700;
+          padding-left: 5px;
+          span {
+            font-size: 12px;
+            margin-top: 5px;
+          }
+        }
+        svg {
+          font-size: 26px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  img {
+    height: 50px;
+  }
+  z-index: 1;
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.3);
+
+  @media screen and (max-width: 996px) {
+    height: 60px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+
+    #item-call {
       display: none;
     }
-  }
-
-  @media screen and (max-width: 996px) {
-    border-top: 2px solid #18acc4;
-    border-right: 2px solid #18acc4;
-    padding: 20px 0;
-    flex: 1 1 auto;
-    flex-direction: column;
-    align-items: center;
-
-    &:first-child {
-      flex: 100%;
-      border: none;
-      flex-direction: row;
-      min-width: 100%;
-      justify-content: center;
-      align-items: center;
-    }
-    &:last-child {
-      border-right: none;
-    }
-    svg {
-      width: 32px;
-      height: 32px;
+    img {
+      height: 40px;
     }
 
-    &:first-child div {
-      margin-left: 15px !important;
-      b {
-        margin-top: 0;
-      }
-    }
-
-    div {
-      margin: 0;
-
-      span,
-      strong {
-        display: none;
-      }
-      small {
-        display: block;
-        font-weight: 400;
-      }
-      b {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
+    ul {
+      li {
+        a {
+          flex-direction: column;
+          padding: 0 20px;
+          small {
+            display: block;
+            font-size: 0.875rem;
+          }
+          span {
+            display: none;
+          }
+          svg {
+            margin: 0;
+            width: 28px;
+            height: 28px;
+          }
+        }
       }
     }
   }
 `;
-
-export const RowFooter = styled.div`
+export const Nav = styled.nav`
+  background: #18acc4;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  background: #18acc4;
-  color: #ffff;
-  padding: 45px 0;
-  div {
+
+  small,
+  button {
+    display: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-      margin: 0 5px;
+    margin-left: -25px;
+    margin-right: -25px;
+
+    li {
+      display: flex;
+      a {
+        display: flex;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 10.4px 25px;
+        &.active,
+        &:hover {
+          background: #007a8d;
+        }
+      }
     }
   }
 
   @media screen and (max-width: 996px) {
-    font-size: 13px;
+    height: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      background: none;
+      padding: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      svg {
+        margin-left: 5px;
+      }
+
+      &:focus ~ ul,
+      &:focus-within ~ ul {
+        display: block;
+      }
+    }
+
+    small {
+      display: block;
+      font-size: 1rem;
+    }
+    ul {
+      display: none;
+      position: absolute;
+      flex-direction: column;
+      right: 0;
+      top: 28px;
+      background: #18acc4;
+      box-shadow: inset -5px 10px 12px -11px rgba(0, 0, 0, 0.5);
+    }
+  }
+`;
+
+export const ProfileUser = styled.div`
+  font-size: 17px;
+  color: #007a8d;
+  font-weight: 700;
+  width: 500px;
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 26px;
+    margin-left: 10px;
+  }
+  small {
+    display: none;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 996px) {
+    justify-content: flex-end;
+    div {
+      border-left: 3px solid #eeefef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-left: 15px;
+    }
+    small {
+      display: block;
+      font-size: 0.880rem;
+    }
+    span {
+      display: none;
+    }
+    svg {
+      margin: 0;
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
+export const Logo = styled.div`
+  @media screen and (max-width: 996px) {
   }
 `;
